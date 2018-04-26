@@ -10,7 +10,7 @@ public class Conexion {
     public Connection conexion(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conex = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
+            conex = DriverManager.getConnection("jdbc:mysql://localhost/prueba","root","");
             System.out.println("Conexion establecida.");
             
         } catch (ClassNotFoundException ex) {
