@@ -6,6 +6,7 @@ import org.omg.CORBA.ORB;
 public class Persona extends PersonaApp.PersonaPOA{
     
     private ORB orb;
+    Conexion conex = new Conexion();
 
     @Override
     public boolean insertarPersona(int id_persona, String nombre, String apellido, int telefono, String direccion, String correo) {
@@ -13,6 +14,15 @@ public class Persona extends PersonaApp.PersonaPOA{
         try {
             String query = "Insert into persona(id_persona,nombre,apellido,telefono,direccion,correo)"
                     + "values ("+id_persona+","+nombre+","+apellido+","+telefono+","+direccion+","+correo+")";
+            conex.conexion();
+            Statement st = conex.conex.createStatement();
+            int valor = st.executeUpdate(query);
+            if(valor > 0){
+                resultado = true;
+            }
+            //Cerramos recursos
+            st.close();
+            conex.conex.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un error " + e.getMessage());
         }
