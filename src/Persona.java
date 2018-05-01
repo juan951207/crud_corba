@@ -31,7 +31,27 @@ public class Persona extends PersonaApp.PersonaPOA{
 
     @Override
     public String consultarPersona(int id_persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String resultado = "";
+        try {
+            String query = "Select * from persona where id_persona = "+id_persona;
+            conex.conexion();
+            Statement st = conex.conex.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                resultado += rs.getLong(1) + " - "
+                        +  rs.getString(2) + " - "
+                        +  rs.getString(3) + " - "
+                        +  rs.getLong(4) + " - "
+                        +  rs.getString(5) + " - "
+                        +  rs.getString(6)+ "\n";
+            }
+            st.close();
+            rs.close();
+            conex.conex.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error " + e.getMessage());
+        }
+        return resultado;
     }
 
     @Override
@@ -46,7 +66,27 @@ public class Persona extends PersonaApp.PersonaPOA{
 
     @Override
     public String listarPersonas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String resultado = "";
+        try {
+            String query = "Select * from persona";
+            conex.conexion();
+            Statement st = conex.conex.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                resultado += rs.getLong(1) + " - "
+                        +  rs.getString(2) + " - "
+                        +  rs.getString(3) + " - "
+                        +  rs.getLong(4) + " - "
+                        +  rs.getString(5) + " - "
+                        +  rs.getString(6)+ "\n";
+            }
+            st.close();
+            rs.close();
+            conex.conex.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error " + e.getMessage());
+        }
+        return resultado;
     }
 
     @Override
