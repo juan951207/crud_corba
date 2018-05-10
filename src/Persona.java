@@ -76,7 +76,7 @@ public class Persona extends PersonaApp.PersonaPOA{
 
     @Override
     public boolean actualizarPersona(int id_persona, String nombre, String apellido, int telefono, String direccion, String correo) {
-         boolean resultado = false;
+        boolean resultado = false;
         try {
             String query = "Update persona set nombre='"+nombre+"',apellido='"+apellido+"',telefono='"+telefono+"',direccion='"+direccion+"',correo='"+correo+"'"
                     + " where id_persona='"+id_persona+"'";
@@ -123,6 +123,22 @@ public class Persona extends PersonaApp.PersonaPOA{
     @Override
     public void shutdown() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public ResultSet listaEstados(){
+        ResultSet resultado = null;
+        
+        try {
+            String query = "Select id, nombre from estado";
+            conex.conexion();
+            Statement st = conex.conex.createStatement();
+            resultado = st.executeQuery(query);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error: " +e.getMessage());
+        }
+        
+        return resultado;
     }
     
 }
